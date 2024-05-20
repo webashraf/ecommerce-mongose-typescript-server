@@ -1,6 +1,6 @@
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
-import globals from "globals";
+import eslint from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import globals from 'globals'
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -13,15 +13,15 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ["dist/*", ".env", "node_modules"],
+    ignores: ['dist/*', '.env', 'node_modules'],
   },
   {
     rules: {
-      "no-unused-vars": "error",
-      "no-unused-expressions": "error",
-      "no-undef": "error",
-      "prefer-const": "error",
-      "no-console": "warn",
+      'no-unused-vars': 'error',
+      'no-unused-expressions': 'error',
+      'no-undef': 'error',
+      'prefer-const': 'error',
+      'no-console': 'warn',
     },
-  }
-);
+  },
+)
