@@ -23,7 +23,7 @@ const retriveAllProductsFromDB = () => __awaiter(void 0, void 0, void 0, functio
 const retriveSingleProductFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () { return yield product_model_1.ProductModel.findById(new mongoose_1.Types.ObjectId(id)); });
 // Update a single product
 const updateSingleProductIntoDB = (id_1, ...args_1) => __awaiter(void 0, [id_1, ...args_1], void 0, function* (id, updatedInfo = null) {
-    const updatedProduct = yield product_model_1.ProductModel.updateOne({ _id: id }, { $set: { name: "Ali kali bali" } });
+    const updatedProduct = yield product_model_1.ProductModel.findOneAndUpdate({ _id: id }, { $set: updatedInfo });
     return updatedProduct;
 });
 // Delete a single product
