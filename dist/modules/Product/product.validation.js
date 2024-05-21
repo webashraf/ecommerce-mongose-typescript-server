@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
 // Schema validation for variants
 const VariantValidationSchema = zod_1.z.object({
-    type: zod_1.z.enum(["color"]),
+    type: zod_1.z.string(),
     value: zod_1.z.string(),
 });
 // Schema validation for inventory

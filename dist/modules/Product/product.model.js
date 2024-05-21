@@ -6,7 +6,7 @@ const mongoose_1 = require("mongoose");
 const variantsSchema = new mongoose_1.Schema({
     type: {
         type: String,
-        enum: ["color"],
+        // enum: ["color"],
         required: true,
     },
     value: {
