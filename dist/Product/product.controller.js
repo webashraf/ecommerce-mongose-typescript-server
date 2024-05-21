@@ -95,9 +95,29 @@ const updateSingelProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
+// Delete a single product
+const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        const deleteProductItem = yield product_service_1.productService.deleteSingleProductIntoDB(productId);
+        res.status(200).json({
+            success: true,
+            message: "Product deleted successfully",
+            data: deleteProductItem
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong!!",
+            data: error
+        });
+    }
+});
 exports.productsController = {
     createNewProduct,
     retriveAllProducts,
     retriveSingleProduct,
-    updateSingelProduct
+    updateSingelProduct,
+    deleteProduct
 };

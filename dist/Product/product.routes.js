@@ -15,4 +15,6 @@ router.get("/", product_controller_1.productsController.retriveAllProducts);
 router.get("/:productId", product_controller_1.productsController.retriveSingleProduct);
 // Update a single product by http://localhost:5000/api/products/:productId this route
 router.put("/:productId", product_controller_1.productsController.updateSingelProduct);
+// Update a single product by http://localhost:5000/api/products/:productId this route
+router.delete("/:productId", product_controller_1.productsController.deleteProduct);
 exports.productsRoute = router;
