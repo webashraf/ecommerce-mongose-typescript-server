@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.productsController = void 0;
 const product_service_1 = require("./product.service");
 const product_validation_1 = __importDefault(require("./product.validation"));
+const mongoose_1 = require("mongoose");
+// Create a new product
 const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newProduct = req.body;
@@ -35,6 +37,67 @@ const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
+// Retrive all products
+const retriveAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const retrivedProducts = yield product_service_1.productService.retriveAllProductsFromDB();
+        res.status(200).json({
+            success: true,
+            message: "Products fetched successfully!",
+            data: retrivedProducts
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+            data: error
+        });
+    }
+});
+// Retirve a single product
+const retriveSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        const singleProudct = yield product_service_1.productService.retriveSingleProductFromDB(productId);
+        res.status(200).json({
+            success: true,
+            message: "Product retrieved successfully",
+            data: singleProudct
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+            data: error
+        });
+    }
+});
+// Update a single product
+const updateSingelProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { productId } = req.params;
+        const updatedInfo = req.body;
+        const ObjectId = { _id: new mongoose_1.Types.ObjectId(productId) };
+        const updateProduct = yield product_service_1.productService.updateSingleProductIntoDB(productId);
+        res.status(200).json({
+            success: true,
+            message: "Product updated successfully",
+            data: updateProduct
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong!!",
+            data: error
+        });
+    }
+});
 exports.productsController = {
     createNewProduct,
+    retriveAllProducts,
+    retriveSingleProduct,
+    updateSingelProduct
 };
