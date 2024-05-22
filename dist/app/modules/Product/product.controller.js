@@ -23,7 +23,7 @@ const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const result = yield product_service_1.productService.createNewProductIntoDB(zodValidationParse);
         res.status(200).json({
             success: true,
-            message: "Product created successfully!!",
+            message: "Product created successfully!",
             data: result,
         });
     }
@@ -61,7 +61,7 @@ const retriveSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const singleProudct = yield product_service_1.productService.retriveSingleProductFromDB(productId);
         res.status(200).json({
             success: true,
-            message: "Product retrieved successfully",
+            message: "Product fetched successfully!",
             data: singleProudct,
         });
     }
@@ -78,10 +78,11 @@ const updateSingelProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
     try {
         const { productId } = req.params;
         const updatedInfo = req.body;
-        const updateProduct = yield product_service_1.productService.updateSingleProductIntoDB(productId, updatedInfo);
+        const zodValidationForUpdate = product_validation_1.default.parse(updatedInfo);
+        const updateProduct = yield product_service_1.productService.updateSingleProductIntoDB(productId, zodValidationForUpdate);
         res.status(200).json({
             success: true,
-            message: "Product updated successfully",
+            message: "Product updated successfully!",
             data: updateProduct,
         });
     }
@@ -97,11 +98,11 @@ const updateSingelProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
-        const deleteProductItem = yield product_service_1.productService.deleteSingleProductIntoDB(productId);
+        yield product_service_1.productService.deleteSingleProductIntoDB(productId);
         res.status(200).json({
             success: true,
-            message: "Product deleted successfully",
-            data: deleteProductItem,
+            message: "Product deleted successfully!",
+            data: null,
         });
     }
     catch (error) {
@@ -114,7 +115,7 @@ const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.productsController = {
     createNewProduct,
-    retriveAllProducts,
+    retriveAndSearchProducts: retriveAllProducts,
     retriveSingleProduct,
     updateSingelProduct,
     deleteProduct,

@@ -23,15 +23,15 @@ const createNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const result = yield order_service_1.orderService.createNewOrderIntoDB(zodOrderValidation);
         res.status(200).json({
             success: true,
-            message: "Order created successfully",
+            message: "Order created successfully!",
             data: result,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Order creation failed",
-            data: error,
+            message: "Insufficient quantity available in inventory",
+            // data: error,
         });
     }
 });
@@ -39,23 +39,22 @@ const createNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function*
 const retriveOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email } = req.query;
-        console.log(email);
         const allOrders = yield order_service_1.orderService.retriveAllOrdersFromDB(email);
         res.status(200).json({
             success: true,
             message: "Order fetched successfully!",
-            data: allOrders
+            data: allOrders,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Order doesn't fetched!",
-            data: error
+            message: "Order not found",
+            data: error,
         });
     }
 });
 exports.orderController = {
     createNewOrder,
-    retriveOrders
+    retriveAndSearchOrders: retriveOrders,
 };

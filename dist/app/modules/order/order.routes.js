@@ -9,6 +9,6 @@ const order_controller_1 = require("./order.controller");
 const router = express_1.default.Router();
 // Create a new order and manage inventory
 router.post("/", order_controller_1.orderController.createNewOrder);
-// Retrive all orders
-router.get("/", order_controller_1.orderController.retriveOrders);
+// Retrive all orders and search a specific order 
+router.get("/", order_controller_1.orderController.retriveAndSearchOrders);
 exports.orderRoute = router;

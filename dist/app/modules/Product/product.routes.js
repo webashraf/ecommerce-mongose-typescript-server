@@ -7,14 +7,14 @@ exports.productsRoute = void 0;
 const express_1 = __importDefault(require("express"));
 const product_controller_1 = require("./product.controller");
 const router = express_1.default.Router();
-// Create new product by http://localhost:5000/api/products this route
+// Create new product
 router.post("/", product_controller_1.productsController.createNewProduct);
-// Retrive all products by http://localhost:5000/api/products this route
-router.get("/", product_controller_1.productsController.retriveAllProducts);
-// Retrive single product by http://localhost:5000/api/products/:productId this route
+// Retrive and search all products
+router.get("/", product_controller_1.productsController.retriveAndSearchProducts);
+// Retrive a single product
 router.get("/:productId", product_controller_1.productsController.retriveSingleProduct);
-// Update a single product by http://localhost:5000/api/products/:productId this route
+// Update a single product
 router.put("/:productId", product_controller_1.productsController.updateSingelProduct);
-// Update a single product by http://localhost:5000/api/products/:productId this route
+// Delete a single product
 router.delete("/:productId", product_controller_1.productsController.deleteProduct);
 exports.productsRoute = router;

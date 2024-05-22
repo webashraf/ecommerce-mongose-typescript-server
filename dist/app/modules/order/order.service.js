@@ -39,11 +39,19 @@ const createNewOrderIntoDB = (order) => __awaiter(void 0, void 0, void 0, functi
 // Retrieve all orders and search by email from DB
 const retriveAllOrdersFromDB = (emailQuery) => __awaiter(void 0, void 0, void 0, function* () {
     if (emailQuery) {
-        return yield order_model_1.OrderModel.find({ email: { $regex: emailQuery, $options: "i" } });
+        const queryResult = yield order_model_1.OrderModel.find({
+            email: { $regex: emailQuery, $options: "i" },
+        });
+        if (Array.isArray(queryResult) && queryResult.length === 0) {
+            return Promise.reject(new mongoose_1.Error("Something went wrong"));
+        }
+        else {
+            return queryResult;
+        }
     }
     return yield order_model_1.OrderModel.find();
 });
 exports.orderService = {
     createNewOrderIntoDB,
-    retriveAllOrdersFromDB
+    retriveAllOrdersFromDB,
 };
