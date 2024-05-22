@@ -13,8 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderController = void 0;
-const order_validation_1 = __importDefault(require("./order.validation"));
 const order_service_1 = require("./order.service");
+const order_validation_1 = __importDefault(require("./order.validation"));
+// Create a new order and manage inventory
 const createNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const orderData = req.body;
@@ -23,17 +24,38 @@ const createNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(200).json({
             success: true,
             message: "Order created successfully",
-            data: result
+            data: result,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
             message: "Order creation failed",
+            data: error,
+        });
+    }
+});
+// Retrieve all orders
+const retriveOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email } = req.query;
+        console.log(email);
+        const allOrders = yield order_service_1.orderService.retriveAllOrdersFromDB(email);
+        res.status(200).json({
+            success: true,
+            message: "Order fetched successfully!",
+            data: allOrders
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Order doesn't fetched!",
             data: error
         });
     }
 });
 exports.orderController = {
     createNewOrder,
+    retriveOrders
 };
