@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderRoute = void 0;
 const express_1 = __importDefault(require("express"));
+const order_controller_1 = require("./order.controller");
 const router = express_1.default.Router();
-router.get("/", (req, res) => {
-    res.send("route prerfectly workeing");
-});
+router.post("/", order_controller_1.orderController.createNewOrder);
 exports.orderRoute = router;

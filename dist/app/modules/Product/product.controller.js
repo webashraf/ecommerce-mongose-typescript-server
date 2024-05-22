@@ -19,7 +19,6 @@ const product_validation_1 = __importDefault(require("./product.validation"));
 const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newProduct = req.body;
-        console.log(newProduct);
         const zodValidationParse = product_validation_1.default.parse(newProduct);
         const result = yield product_service_1.productService.createNewProductIntoDB(zodValidationParse);
         res.status(200).json({
@@ -39,9 +38,8 @@ const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
 // Retrive all products
 const retriveAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const searchQuery = req.query;
-        console.log(searchQuery.searchTerm);
-        const retrivedProducts = yield product_service_1.productService.retriveAllProductsFromDB(searchQuery.searchTerm);
+        const searchQuery = req.query.searchTerm;
+        const retrivedProducts = yield product_service_1.productService.retriveAllProductsFromDB(searchQuery);
         res.status(200).json({
             success: true,
             message: "Products fetched successfully!",
@@ -80,7 +78,6 @@ const updateSingelProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
     try {
         const { productId } = req.params;
         const updatedInfo = req.body;
-        console.log(updatedInfo);
         const updateProduct = yield product_service_1.productService.updateSingleProductIntoDB(productId, updatedInfo);
         res.status(200).json({
             success: true,
